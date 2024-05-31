@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { Character } from '../interfaces';
+import { Result } from '../interfaces/character';
 
 
 const apiUrl: string = "https://rickandmortyapi.com/api/character/";
@@ -12,8 +13,8 @@ export const getaAllCharacters = async(): Promise<Character> => {
 }
 
 
-export const getCharacterById = async( characterId: number ): Promise<Character> => {
-    const { data } = await axios.get<Character>(apiUrl + `${ characterId }`);
+export const getCharacterById = async( characterId: number ): Promise<Result> => {
+    const { data } = await axios.get<Result>(apiUrl + `${ characterId }`);
     // console.log( data )
     return data;
 }

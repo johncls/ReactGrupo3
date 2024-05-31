@@ -1,6 +1,7 @@
 import { getCharacterById } from './generics/CharacterManagement';
 import { getaAllCharacters } from './generics/CharacterManagement';
 import { getCharacterFromLocalStorage } from './generics/CharacterManagement';
+import { Result } from './interfaces/character';
 
 
 console.log('CARGANDO TODOS LOS CHARACTERS')
@@ -36,4 +37,20 @@ idsArray.forEach( id =>
         })
     .catch( error => console.error( error ) )    
 )
+
+console.log('CARGANDO CHARACTER POR ID PARA CLONAR')
+const id = idsArray[idsArray.length-1]
+const clone = "Clone";
+getCharacterById(id)
+.then( (character) => {
+        let result: Result = character;
+        result.id += 1;
+        result.name += clone;
+        result.species = clone;
+
+        
+        localStorage.setItem("Character" + result.id , JSON.stringify(result));
+    })
+.catch( error => console.error( error ) ) 
+.finally(() => console.log('NUEVO CHARACTER CLONE EN LS'))
 
